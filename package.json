@@ -1,0 +1,18 @@
+{
+  "name": "wsid",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx parcel index.html",
+    "build": "npx parcel build index.html "
+  },
+  "devDependencies": {
+    "postcss-modules": "^2.0.0",
+    "sass": "^1.26.8",
+    "tailwindcss": "^1.4.6"
+  },
+  "dependencies": {
+    "postcss-import": "^12.0.1"
+  }
+}
