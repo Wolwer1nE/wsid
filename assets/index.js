@@ -1,20 +1,10 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-    const willDo = document.getElementById("willDo");
-    const taskInput = document.getElementById("taskInput");
-    const taskContainer = document.getElementById("taskInput");
+import App from './components/App.svelte';
 
-    willDo.onclick = function() {
-        const task = taskInput.value
-        if (task)
-        {
-            alert(task)
-        }
-
-    };
-
-    function addTask(text)
-    {
-        taskContainer
-    }
-
+const app = new App({
+    target: document.body,
+    props: {
+        name: 'Svelte',
+    },
 });
+
+export default app;
