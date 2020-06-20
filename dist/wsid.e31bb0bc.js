@@ -2197,74 +2197,7 @@ function loop_guard(timeout) {
     }
   };
 }
-},{}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"assets/components/App.svelte":[function(require,module,exports) {
+},{}],"components/App.svelte":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2296,29 +2229,50 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var file = "assets/components/App.svelte";
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function add_css() {
-  var style = (0, _internal.element)("style");
-  style.id = "svelte-vpn27x-style";
-  style.textContent = "@tailwind base;@tailwind components;@tailwind utilities;\n";
-  (0, _internal.append_dev)(document.head, style);
-}
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var file = "components/App.svelte";
 
 function create_fragment(ctx) {
-  var div2;
+  var div3;
   var div0;
   var h10;
   var t1;
   var h11;
   var t3;
   var div1;
-  var input;
+  var t4_value =
+  /*tasks*/
+  ctx[1].join(", ") + "";
   var t4;
+  var t5;
+  var div2;
+  var input;
+  var t6;
   var button;
+  var mounted;
+  var dispose;
   var block = {
     c: function create() {
-      div2 = (0, _internal.element)("div");
+      div3 = (0, _internal.element)("div");
       div0 = (0, _internal.element)("div");
       h10 = (0, _internal.element)("h1");
       h10.textContent = "Итак, вы не знаете, что делать, ведь дел слишком много.";
@@ -2327,48 +2281,88 @@ function create_fragment(ctx) {
       h11.textContent = "Давайте перечислим срочные дела.";
       t3 = (0, _internal.space)();
       div1 = (0, _internal.element)("div");
+      t4 = (0, _internal.text)(t4_value);
+      t5 = (0, _internal.space)();
+      div2 = (0, _internal.element)("div");
       input = (0, _internal.element)("input");
-      t4 = (0, _internal.space)();
+      t6 = (0, _internal.space)();
       button = (0, _internal.element)("button");
-      button.textContent = "Сделаю!";
-      (0, _internal.add_location)(h10, file, 13, 8, 217);
-      (0, _internal.add_location)(h11, file, 14, 8, 291);
+      button.textContent = "Не Сделаю Никогда!";
+      (0, _internal.add_location)(h10, file, 12, 8, 264);
+      (0, _internal.add_location)(h11, file, 13, 8, 338);
       (0, _internal.attr_dev)(div0, "class", "text-center");
-      (0, _internal.add_location)(div0, file, 12, 4, 182);
+      (0, _internal.add_location)(div0, file, 11, 4, 229);
+      (0, _internal.attr_dev)(div1, "class", "text-center");
+      (0, _internal.add_location)(div1, file, 15, 4, 397);
       (0, _internal.attr_dev)(input, "id", "taskInput");
       (0, _internal.attr_dev)(input, "class", "shadow appearance-none border rounded w-1/6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline");
       (0, _internal.attr_dev)(input, "type", "text");
       (0, _internal.attr_dev)(input, "placeholder", "Мне срочно надо сделать...");
-      (0, _internal.add_location)(input, file, 17, 8, 390);
+      (0, _internal.add_location)(input, file, 19, 8, 508);
       (0, _internal.attr_dev)(button, "id", "willDo");
-      (0, _internal.attr_dev)(button, "class", "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full");
-      (0, _internal.attr_dev)(button, "onclick", "addTask()");
-      (0, _internal.add_location)(button, file, 18, 8, 605);
-      (0, _internal.attr_dev)(div1, "class", "mt-4 text-center");
-      (0, _internal.add_location)(div1, file, 16, 4, 350);
-      (0, _internal.attr_dev)(div2, "class", "flex flex-col");
-      (0, _internal.add_location)(div2, file, 11, 0, 149);
+      (0, _internal.attr_dev)(button, "class", "bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full");
+      (0, _internal.add_location)(button, file, 21, 8, 763);
+      (0, _internal.attr_dev)(div2, "class", "mt-4 text-center");
+      (0, _internal.add_location)(div2, file, 18, 4, 468);
+      (0, _internal.attr_dev)(div3, "class", "flex flex-col");
+      (0, _internal.add_location)(div3, file, 10, 0, 196);
     },
     l: function claim(nodes) {
       throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     },
     m: function mount(target, anchor) {
-      (0, _internal.insert_dev)(target, div2, anchor);
-      (0, _internal.append_dev)(div2, div0);
+      (0, _internal.insert_dev)(target, div3, anchor);
+      (0, _internal.append_dev)(div3, div0);
       (0, _internal.append_dev)(div0, h10);
       (0, _internal.append_dev)(div0, t1);
       (0, _internal.append_dev)(div0, h11);
-      (0, _internal.append_dev)(div2, t3);
-      (0, _internal.append_dev)(div2, div1);
-      (0, _internal.append_dev)(div1, input);
+      (0, _internal.append_dev)(div3, t3);
+      (0, _internal.append_dev)(div3, div1);
       (0, _internal.append_dev)(div1, t4);
-      (0, _internal.append_dev)(div1, button);
+      (0, _internal.append_dev)(div3, t5);
+      (0, _internal.append_dev)(div3, div2);
+      (0, _internal.append_dev)(div2, input);
+      (0, _internal.set_input_value)(input,
+      /*nextTask*/
+      ctx[0]);
+      (0, _internal.append_dev)(div2, t6);
+      (0, _internal.append_dev)(div2, button);
+
+      if (!mounted) {
+        dispose = [(0, _internal.listen_dev)(input, "input",
+        /*input_input_handler*/
+        ctx[4]), (0, _internal.listen_dev)(button, "click",
+        /*addTask*/
+        ctx[2], false, false, false)];
+        mounted = true;
+      }
     },
-    p: _internal.noop,
+    p: function update(ctx, _ref) {
+      var _ref2 = _slicedToArray(_ref, 1),
+          dirty = _ref2[0];
+
+      if (dirty &
+      /*tasks*/
+      2 && t4_value !== (t4_value =
+      /*tasks*/
+      ctx[1].join(", ") + "")) (0, _internal.set_data_dev)(t4, t4_value);
+
+      if (dirty &
+      /*nextTask*/
+      1 && input.value !==
+      /*nextTask*/
+      ctx[0]) {
+        (0, _internal.set_input_value)(input,
+        /*nextTask*/
+        ctx[0]);
+      }
+    },
     i: _internal.noop,
     o: _internal.noop,
     d: function destroy(detaching) {
-      if (detaching) (0, _internal.detach_dev)(div2);
+      if (detaching) (0, _internal.detach_dev)(div3);
+      mounted = false;
+      (0, _internal.run_all)(dispose);
     }
   };
   (0, _internal.dispatch_dev)("SvelteRegisterBlock", {
@@ -2383,7 +2377,17 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
   var name = $$props.name;
-  var writable_props = ["name"];
+  var _$$props$nextTask = $$props.nextTask,
+      nextTask = _$$props$nextTask === void 0 ? "" : _$$props$nextTask;
+  var _$$props$tasks = $$props.tasks,
+      tasks = _$$props$tasks === void 0 ? [] : _$$props$tasks;
+
+  function addTask() {
+    $$invalidate(1, tasks = [].concat(_toConsumableArray(tasks), [nextTask]));
+    $$invalidate(0, nextTask = "");
+  }
+
+  var writable_props = ["name", "nextTask", "tasks"];
   Object.keys($$props).forEach(function (key) {
     if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn("<App> was created with unknown prop '".concat(key, "'"));
   });
@@ -2392,25 +2396,37 @@ function instance($$self, $$props, $$invalidate) {
       $$scope = $$props.$$scope;
   (0, _internal.validate_slots)("App", $$slots, []);
 
+  function input_input_handler() {
+    nextTask = this.value;
+    $$invalidate(0, nextTask);
+  }
+
   $$self.$set = function ($$props) {
-    if ("name" in $$props) $$invalidate(0, name = $$props.name);
+    if ("name" in $$props) $$invalidate(3, name = $$props.name);
+    if ("nextTask" in $$props) $$invalidate(0, nextTask = $$props.nextTask);
+    if ("tasks" in $$props) $$invalidate(1, tasks = $$props.tasks);
   };
 
   $$self.$capture_state = function () {
     return {
-      name: name
+      name: name,
+      nextTask: nextTask,
+      tasks: tasks,
+      addTask: addTask
     };
   };
 
   $$self.$inject_state = function ($$props) {
-    if ("name" in $$props) $$invalidate(0, name = $$props.name);
+    if ("name" in $$props) $$invalidate(3, name = $$props.name);
+    if ("nextTask" in $$props) $$invalidate(0, nextTask = $$props.nextTask);
+    if ("tasks" in $$props) $$invalidate(1, tasks = $$props.tasks);
   };
 
   if ($$props && "$$inject" in $$props) {
     $$self.$inject_state($$props.$$inject);
   }
 
-  return [name];
+  return [nextTask, tasks, addTask, name, input_input_handler];
 }
 
 var App = /*#__PURE__*/function (_SvelteComponentDev) {
@@ -2424,9 +2440,10 @@ var App = /*#__PURE__*/function (_SvelteComponentDev) {
     _classCallCheck(this, App);
 
     _this = _super.call(this, options);
-    if (!document.getElementById("svelte-vpn27x-style")) add_css();
     (0, _internal.init)(_assertThisInitialized(_this), options, instance, create_fragment, _internal.safe_not_equal, {
-      name: 0
+      name: 3,
+      nextTask: 0,
+      tasks: 1
     });
     (0, _internal.dispatch_dev)("SvelteRegisterComponent", {
       component: _assertThisInitialized(_this),
@@ -2439,7 +2456,7 @@ var App = /*#__PURE__*/function (_SvelteComponentDev) {
 
     if (
     /*name*/
-    ctx[0] === undefined && !("name" in props)) {
+    ctx[3] === undefined && !("name" in props)) {
       console.warn("<App> was created without expected prop 'name'");
     }
 
@@ -2454,6 +2471,22 @@ var App = /*#__PURE__*/function (_SvelteComponentDev) {
     set: function set(value) {
       throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     }
+  }, {
+    key: "nextTask",
+    get: function get() {
+      throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    },
+    set: function set(value) {
+      throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    }
+  }, {
+    key: "tasks",
+    get: function get() {
+      throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    },
+    set: function set(value) {
+      throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    }
   }]);
 
   return App;
@@ -2461,7 +2494,7 @@ var App = /*#__PURE__*/function (_SvelteComponentDev) {
 
 var _default = App;
 exports.default = _default;
-},{"svelte/internal":"node_modules/svelte/internal/index.mjs","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"assets/index.js":[function(require,module,exports) {
+},{"svelte/internal":"node_modules/svelte/internal/index.mjs"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2481,7 +2514,7 @@ var app = new _App.default({
 });
 var _default = app;
 exports.default = _default;
-},{"./components/App.svelte":"assets/components/App.svelte"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./components/App.svelte":"components/App.svelte"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2509,7 +2542,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49700" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50521" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -2685,5 +2718,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","assets/index.js"], null)
-//# sourceMappingURL=/assets.8f4429fc.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+//# sourceMappingURL=/wsid.e31bb0bc.js.map
