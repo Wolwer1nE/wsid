@@ -8,7 +8,7 @@
     "postcss:build": "postcss assets/index.pcss -o assets/index.css --env production",
     "parcel:serve": "parcel index.html",
     "parcel:watch": "parcel watch index.html",
-    "parcel:build": "parcel build index.html  --no-source-maps",
+    "parcel:build": "parcel build index.html  --no-source-maps --public-url ./ ",
     "build": "RMDIR \"dist\" /S /Q && npm-run-all -s  postcss:build parcel:build",
     "start": "npm-run-all -s -p postcss:watch parcel:serve"
   },
