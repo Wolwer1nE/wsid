@@ -35,7 +35,6 @@
     }
 
     const onSelected = (task) => {
-        console.log('Callback!')
         if (winners.length === 0 && tasks.length === 0)
         {
             winner = task;
@@ -54,7 +53,6 @@
                 winners = [];
                 break
         }
-        console.log('Selecting next pair')
         let i = randomIndex(tasks.length)
         taskA = tasks[i]
         tasks.splice(i, 1)

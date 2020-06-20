@@ -1,7 +1,8 @@
 module.exports = {
-  purge:  [
-  './components/**/*.svelte'
-],
+  purge:  {content: ['./components/**/*.svelte'],
+    options: {
+      whitelistPatterns: [/^bg-/],
+    }},
   theme: {
     extend: {},
   },

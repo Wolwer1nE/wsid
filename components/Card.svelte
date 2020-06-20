@@ -4,7 +4,6 @@
     export let color
 
     function runCallback() {
-        console.log("Yeaha")
         onSelected(text)
     }
 </script>
