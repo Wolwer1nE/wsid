@@ -16,7 +16,7 @@
     "@babel/polyfill": "^7.10.1",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-svelte": "^4.0.6",
-    "postcss": "^7.0.36",
+    "postcss": "^8.2.13",
     "postcss-load-config": "^2.1.0",
     "postcss-modules": "^2.0.0",
     "postcss-cli": "^7.1.0",
